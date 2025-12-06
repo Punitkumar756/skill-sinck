@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillSync AI - Career GPS</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon">🎯</span>
+                SkillSync AI
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#profile" class="nav-link">Profile</a></li>
+                <li><a href="#quiz" class="nav-link">Career Quiz</a></li>
+                <li><a href="#jobs" class="nav-link">Job Match</a></li>
+                <li><a href="#roadmap" class="nav-link">Roadmap</a></li>
+                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                <li><a href="#shadowing" class="nav-link">Virtual Shadow</a></li>
+                <li><a href="#admin" class="nav-link">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1 class="hero-title">Your Career GPS</h1>
+                    <p class="hero-subtitle">Bridge the gap between academic reality and industry demands with AI-powered career guidance</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="showSection('profile')">Get Started</button>
+                        <button class="btn btn-secondary" onclick="showSection('quiz')">Take Career Quiz</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="features">
+                <h2 class="section-title">Powerful Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📄</div>
+                        <h3>Smart Profiling</h3>
+                        <p>AI-powered resume parser automatically builds your skill profile in seconds</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎮</div>
+                        <h3>Psychometric Quiz</h3>
+                        <p>Gamified personality test that maps your traits to ideal career paths</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Job Match Engine</h3>
+                        <p>Get precise match percentages for live job roles based on your skills</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🗺️</div>
+                        <h3>Dynamic Roadmap</h3>
+                        <p>Visual timeline showing skill gaps and personalized learning paths</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💡</div>
+                        <h3>Portfolio Architect</h3>
+                        <p>AI generates custom project ideas based on your interests</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">👥</div>
+                        <h3>Virtual Shadowing</h3>
+                        <p>Roleplay different jobs with AI to discover your passion</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Section -->
+        <section id="profile" class="section">
+            <div class="container">
+                <h1 class="page-title">Build Your Profile</h1>
+                
+                <div class="tabs">
+                    <button class="tab active" onclick="switchTab('upload')">📄 Upload Resume</button>
+                    <button class="tab" onclick="switchTab('manual')">✏️ Manual Entry</button>
+                </div>
+
+                <div id="upload-tab" class="tab-content active">
+                    <div class="card">
+                        <h2>Upload Your Resume</h2>
+                        <p>Our AI will automatically extract your skills, education, and experience</p>
+                        
+                        <form id="resume-form" onsubmit="uploadResume(event)">
+                            <div class="file-input-wrapper">
+                                <input type="file" id="resume-file" accept=".pdf,.doc,.docx,.txt" required>
+                                <label for="resume-file" class="file-label" id="file-label">Choose File (PDF, DOC, DOCX)</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Parse Resume</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="manual-tab" class="tab-content">
+                    <div class="card">
+                        <h2>Enter Your Details</h2>
+                        <form id="manual-form" onsubmit="createProfile(event)">
+                            <div class="form-group">
+                                <label>Skills (comma-separated)</label>
+                                <input type="text" id="skills" placeholder="e.g., Python, React, SQL, Machine Learning" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Education</label>
+                                <input type="text" id="education" placeholder="e.g., Bachelor of Technology in Computer Science" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Interests (comma-separated)</label>
+                                <input type="text" id="interests" placeholder="e.g., Web Development, Data Science, AI">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Create Profile</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="profile-display" class="card" style="display: none;">
+                    <h2>Your Profile</h2>
+                    <div id="profile-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section id="quiz" class="section">
+            <div class="container">
+                <h1 class="page-title">Career Discovery Quiz</h1>
+                
+                <div id="quiz-intro" class="card">
+                    <h2>Discover Your Ideal Career Path</h2>
+                    <p>Take our psychometric quiz to find careers that match your personality</p>
+                    <button class="btn btn-primary" onclick="startQuiz()">Start Quiz</button>
+                </div>
+
+                <div id="quiz-content" style="display: none;">
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="quiz-progress"></div>
+                        </div>
+                        <p class="progress-text" id="progress-text"></p>
+                    </div>
+
+                    <div class="card">
+                        <h2 id="question-text"></h2>
+                        <div id="options-container"></div>
+                        <div class="quiz-navigation">
+                            <button class="btn btn-secondary" onclick="previousQuestion()" id="prev-btn">Previous</button>
+                            <button class="btn btn-primary" onclick="nextQuestion()" id="next-btn">Next</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="quiz-results" style="display: none;"></div>
+            </div>
+        </section>
+
+        <!-- Job Matching Section -->
+        <section id="jobs" class="section">
+            <div class="container">
+                <h1 class="page-title">Job Match Engine</h1>
+                
+                <div class="card">
+                    <div class="search-bar">
+                        <input type="text" id="job-search" placeholder="Search for jobs...">
+                        <button class="btn btn-primary" onclick="searchJobs()">🔍 Search</button>
+                    </div>
+                </div>
+
+                <h2>Your Job Matches</h2>
+                <p class="section-subtitle">Based on your skills and profile</p>
+                <div id="job-matches" class="matches-grid"></div>
+            </div>
+        </section>
+
+        <!-- Roadmap Section -->
+        <section id="roadmap" class="section">
+            <div class="container">
+                <h1 class="page-title">Your Learning Roadmap</h1>
+                
+                <div id="roadmap-generate" class="card">
+                    <h2>Generate Your Personalized Roadmap</h2>
+                    <p>Enter a job ID from the Job Matching page to create your learning path</p>
+                    <div class="input-group">
+                        <input type="text" id="target-job" placeholder="Enter Job ID (e.g., job_001)">
+                        <button class="btn btn-primary" onclick="generateRoadmap()">🗺️ Generate Roadmap</button>
+                    </div>
+                </div>
+
+                <div id="roadmap-content" style="display: none;"></div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="section">
+            <div class="container">
+                <h1 class="page-title">Portfolio Architect</h1>
+                
+                <div class="card">
+                    <h2>Build Projects That Stand Out</h2>
+                    <p>Get AI-generated project ideas tailored to your interests and skill level</p>
+                    <button class="btn btn-primary" onclick="generateProjectIdeas()">💡 Generate Project Ideas</button>
+                </div>
+
+                <div id="project-ideas" style="display: none;"></div>
+            </div>
+        </section>
+
+        <!-- Virtual Shadowing Section -->
+        <section id="shadowing" class="section">
+            <div class="container">
+                <h1 class="page-title">Virtual Job Shadowing</h1>
+                
+                <div id="role-selection">
+                    <div class="card">
+                        <h2>Experience a Day in the Life</h2>
+                        <p>Chat with an AI professional and roleplay different job scenarios</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Select a Job Role to Shadow</h3>
+                        <div class="roles-grid" id="roles-grid"></div>
+                        <button class="btn btn-primary btn-large" onclick="startShadowing()" id="start-shadow-btn" disabled>Start Shadowing</button>
+                    </div>
+                </div>
+
+                <div id="chat-section" style="display: none;">
+                    <div class="card chat-header">
+                        <h2 id="shadow-role-title"></h2>
+                        <button class="btn btn-secondary" onclick="endShadowing()">End Session</button>
+                    </div>
+
+                    <div class="card chat-container">
+                        <div id="messages-container"></div>
+                        <div class="input-container">
+                            <input type="text" id="chat-input" placeholder="Ask a question about this role...">
+                            <button class="btn btn-primary" onclick="sendMessage()">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admin Section -->
+        <section id="admin" class="section">
+            <div class="container">
+                <h1 class="page-title">University Analytics Dashboard</h1>
+                <div id="admin-content"></div>
+            </div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
